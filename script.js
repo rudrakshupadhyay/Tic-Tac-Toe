@@ -49,13 +49,14 @@ const game = (function(){
             if(status === -1) return;
             if(status === 1){
                 isOver = true;
-                return `${currPlayer} win`;
+                return currPlayer.mark;
             }
             if(status === 0){
                 isOver = true;
                 return "Draw";
             }
             currPlayer = currPlayer === player1 ? player2 : player1;
+            return "C";
         };
         let reStart = () =>{
             isOver = false;
@@ -63,5 +64,13 @@ const game = (function(){
             currPlayer = player1;
         };
         let currChance = () => currPlayer;
-        return {play , reStart , currChance};
+        return {play , reStart , currChance, isOver};
 })();
+
+const board = document.querySelector(".board");
+board.addEventListener("click",(e) => {
+    if(e.target.classList.contains("cell")){
+        const index = e.target.dataset.index;
+        let currStatus = game.play(index);
+    }
+});
