@@ -14,7 +14,7 @@ const player = (id,mark) => {
 };
 function playRound(currPlayer,index){
     if (!Gameboard.placeMark(index,currPlayer.id)) {
-        return -1; // -1 -> failed to mark already marked ,1 -> curr played won , 0 -> Draw noone win, NULL -> Continue Game
+        return -1; // -1 -> failed to mark already marked ,1 -> curr played won , 0 -> Draw noOne win, NULL -> Continue Game
     }
     const currBoard = Gameboard.getboard();
     const WINNING_LINES = [
@@ -64,13 +64,49 @@ const game = (function(){
             currPlayer = player1;
         };
         let currChance = () => currPlayer;
-        return {play , reStart , currChance, isOver};
+        return {play , reStart , currChance};
 })();
-
-const board = document.querySelector(".board");
-board.addEventListener("click",(e) => {
-    if(e.target.classList.contains("cell")){
-        const index = e.target.dataset.index;
-        let currStatus = game.play(index);
-    }
-});
+const cells = document.querySelectorAll(".cell");
+function removeMarks(){
+    cells.forEach(currCell => {
+        currCell.textContent = "";
+    });
+}
+(function () {
+    const board = document.querySelector(".board");
+    const mark = document.querySelector(".mark");
+    const playerX = document.getElementById("playerX");
+    const currDraw = document.getElementById("currDraw");
+    const playerO = document.getElementById("playerO");
+    board.addEventListener("click",(e) => {
+        if(e.target.classList.contains("cell")){
+            const index = Number(e.target.dataset.index);
+            const currPlayer = game.currChance();
+            let currStatus = game.play(index);
+            if(currStatus === undefined) return;
+            e.target.textContent = `${currPlayer.mark}`;
+            if (currStatus === "Draw") {
+                let Num_Draw = Number(currDraw.textContent);
+                Num_Draw++;
+                currDraw.textContent = `${Num_Draw}`;
+                game.reStart();
+                removeMarks();
+            }
+            if (currStatus === "X") {
+                let Num_X = Number(playerX.textContent);
+                Num_X++;
+                playerX.textContent = `${Num_X}`;
+                game.reStart();
+                removeMarks();
+            }
+            if (currStatus === "O") {
+                let Num_O = Number(playerO.textContent);
+                Num_O++;
+                playerO.textContent = `${Num_O}`;
+                game.reStart();
+                removeMarks();
+            }
+            mark.textContent = game.currChance().mark;
+        }
+    });
+})();
