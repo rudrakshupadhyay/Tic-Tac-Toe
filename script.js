@@ -9,6 +9,13 @@ const Gameboard = (function(){
     let reset = () => board.fill(0);
     return { getboard , placeMark , reset };
 })();
+
+// playRound return values:
+// -1 -> invalid move
+//  1 -> win
+//  0 -> draw
+// null -> continue
+
 const player = (id,mark) => {
     return { id , mark};
 };
@@ -92,6 +99,7 @@ function removeMarks(){
                 Num_Draw++;
                 currDraw.textContent = `${Num_Draw}`;
                 ans.textContent = "Draw";
+                ans.style.color = "rgb(117, 43, 30)";
                 return;
             }
             if (currStatus === "X") {
@@ -99,6 +107,7 @@ function removeMarks(){
                 Num_X++;
                 playerX.textContent = `${Num_X}`;
                 ans.textContent = "Player X win";
+                ans.style.color = "Yellow";
                 return;
             }
             if (currStatus === "O") {
@@ -106,6 +115,7 @@ function removeMarks(){
                 Num_O++;
                 playerO.textContent = `${Num_O}`;
                 ans.textContent = "Player O win";
+                ans.style.color = "Yellow";
                 return;
             }
             mark.textContent = game.currChance().mark;
@@ -115,5 +125,6 @@ function removeMarks(){
         game.reStart();
         removeMarks();
         ans.textContent = "Game is ON";
+        ans.style.color = "Green";
     });
 })();
