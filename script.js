@@ -124,6 +124,7 @@ function removeMarks(){
     button.addEventListener("click" , () => {
         game.reStart();
         removeMarks();
+        mark.textContent = game.currChance().mark;
         ans.textContent = "Game is ON";
         ans.style.color = "Green";
     });
