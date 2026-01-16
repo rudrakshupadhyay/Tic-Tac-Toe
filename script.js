@@ -1,5 +1,5 @@
 const Gameboard = (function(){
-    let board = Array(9).fill(0);
+    let board = Array(9).fill(0); // 0 -> empty , 1 -> "X" , 2 -> "O"
     let getboard = () => board;
     let placeMark = (index,player) => {
         if (board[index] !== 0) return false;

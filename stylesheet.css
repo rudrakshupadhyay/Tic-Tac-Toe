@@ -119,3 +119,27 @@ select {
   border-radius: 10px;
   background-color: rgba(120, 118, 118, 0.5);
 }
+.cell:hover{
+  box-shadow: 0 0 10px rgba(226, 163, 90, 0.5);
+}
+.cell:active{
+  transform: scale(0.8);
+}
+.newGame{
+  text-align: center;
+}
+button{
+  background-color: rgba(110, 176, 235, 0.5);
+  color: rgb(248, 244, 244);
+  font-size: larger;
+  font-weight: bolder;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+}
+button:hover{
+  background-color: rgb(114, 201, 231);
+}
+button:active{
+  transform: scale(0.8);
+}
