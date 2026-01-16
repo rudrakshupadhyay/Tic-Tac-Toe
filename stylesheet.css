@@ -101,6 +101,19 @@ select {
   background-color: rgb(2, 43, 96);
   padding: 10px; 
 }
+.whatHappning{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.ques , .ans{
+  color: white;
+  font-size: xx-large;
+  font-weight: 900;
+}
+.ans{
+  color: green;
+}
 .board{
   min-height: 400px;
   height: 60%;

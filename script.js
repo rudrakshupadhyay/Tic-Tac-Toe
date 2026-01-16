@@ -78,6 +78,8 @@ function removeMarks(){
     const playerX = document.getElementById("playerX");
     const currDraw = document.getElementById("currDraw");
     const playerO = document.getElementById("playerO");
+    const ans = document.querySelector(".ans");
+    const button = document.querySelector("button"); 
     board.addEventListener("click",(e) => {
         if(e.target.classList.contains("cell")){
             const index = Number(e.target.dataset.index);
@@ -89,24 +91,29 @@ function removeMarks(){
                 let Num_Draw = Number(currDraw.textContent);
                 Num_Draw++;
                 currDraw.textContent = `${Num_Draw}`;
-                game.reStart();
-                removeMarks();
+                ans.textContent = "Draw";
+                return;
             }
             if (currStatus === "X") {
                 let Num_X = Number(playerX.textContent);
                 Num_X++;
                 playerX.textContent = `${Num_X}`;
-                game.reStart();
-                removeMarks();
+                ans.textContent = "Player X win";
+                return;
             }
             if (currStatus === "O") {
                 let Num_O = Number(playerO.textContent);
                 Num_O++;
                 playerO.textContent = `${Num_O}`;
-                game.reStart();
-                removeMarks();
+                ans.textContent = "Player O win";
+                return;
             }
             mark.textContent = game.currChance().mark;
         }
+    });
+    button.addEventListener("click" , () => {
+        game.reStart();
+        removeMarks();
+        ans.textContent = "Game is ON";
     });
 })();
